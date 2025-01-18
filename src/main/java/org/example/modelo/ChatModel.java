@@ -29,7 +29,15 @@ public class ChatModel {
         }
     }
 
-    public void sendMessage() {
-
+    public void sendMessage(String message) {
+        socketClient.sendMessage(message);
+    }
+    
+    public void reciveMessage() {
+        try {
+            socketClient.reciveMessage();
+        } catch(IOException exception) {
+            System.out.println("Error trying to recive the message" + exception.getMessage());
+        }
     }
 }

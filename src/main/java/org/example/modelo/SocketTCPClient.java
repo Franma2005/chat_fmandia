@@ -48,12 +48,12 @@ public class SocketTCPClient {
         System.out.println("(Client) The text channels of communication have been closed");
     }
 
-    public String sendMessage() throws IOException {
-        return "(Client) " + br.readLine();
-    }
-
-    public void reciveMessage(String message) {
+    public void sendMessage(String message) {
         System.out.println("(Client) " + message);
         pw.println(message);
+    }
+
+    public String reciveMessage() throws IOException {
+        return "(Client) " + br.readLine();
     }
 }

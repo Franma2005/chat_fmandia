@@ -16,7 +16,10 @@ public class ChatView extends javax.swing.JFrame {
     public ChatView() {
         initComponents();
     }
-
+    
+    public String getTextSend() {
+        return this.textSend.getText();
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -31,6 +34,8 @@ public class ChatView extends javax.swing.JFrame {
         titlePanel = new javax.swing.JPanel();
         title = new javax.swing.JLabel();
         chatPanel = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        textArea = new javax.swing.JTextArea();
         textSendPanel = new javax.swing.JPanel();
         textSend = new javax.swing.JLabel();
         buttonSend = new javax.swing.JButton();
@@ -69,15 +74,19 @@ public class ChatView extends javax.swing.JFrame {
 
         chatPanel.setBackground(new java.awt.Color(255, 153, 153));
 
+        textArea.setColumns(20);
+        textArea.setRows(5);
+        jScrollPane1.setViewportView(textArea);
+
         javax.swing.GroupLayout chatPanelLayout = new javax.swing.GroupLayout(chatPanel);
         chatPanel.setLayout(chatPanelLayout);
         chatPanelLayout.setHorizontalGroup(
             chatPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addComponent(jScrollPane1)
         );
         chatPanelLayout.setVerticalGroup(
             chatPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 270, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 270, Short.MAX_VALUE)
         );
 
         buttonSend.setText("Send");
@@ -176,7 +185,9 @@ public class ChatView extends javax.swing.JFrame {
     private javax.swing.JButton buttonSend;
     private javax.swing.JPanel chatPanel;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JPanel principal;
+    private javax.swing.JTextArea textArea;
     private javax.swing.JLabel textSend;
     private javax.swing.JPanel textSendPanel;
     private javax.swing.JLabel title;

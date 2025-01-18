@@ -27,6 +27,6 @@ public class ChatControler {
     }
 
     public void sendMessage() {
-
+        model.sendMessage(view.getTextSend());
     }
 }

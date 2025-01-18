@@ -33,11 +33,12 @@ public class ChatModel {
         socketClient.sendMessage(message);
     }
     
-    public void reciveMessage() {
+    public String reciveMessage() {
         try {
-            socketClient.reciveMessage();
+            return socketClient.reciveMessage();
         } catch(IOException exception) {
             System.out.println("Error trying to recive the message" + exception.getMessage());
         }
+        return "";
     }
 }

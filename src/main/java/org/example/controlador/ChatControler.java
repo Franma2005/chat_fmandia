@@ -23,10 +23,25 @@ public class ChatControler {
     }
 
     public void init() {
-        model.connect();
+        boolean salir;
+        do {
+           model.connect();
+           sendMessage();
+           salir = reciveMessage();
+        } while(salir);
+        model.disconnect();
     }
 
     public void sendMessage() {
         model.sendMessage(view.getTextSend());
+    }
+    
+    public boolean reciveMessage() {
+        String text = model.reciveMessage();
+        view.setTextArea(text);
+        if (text.equals("END")) {
+            return false;
+        }
+        return true;
     }
 }

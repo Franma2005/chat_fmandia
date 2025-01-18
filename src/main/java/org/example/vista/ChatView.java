@@ -146,6 +146,10 @@ public class ChatView extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    public void setTextArea(String message) {
+        this.textArea.append(message);
+    }
+    
     /**
      * @param args the command line arguments
      */

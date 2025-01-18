@@ -11,12 +11,22 @@ public class ChatModel {
     }
 
     public void connect() {
-        socketClient.start();
-        socketClient.startTextChannels();
+        try {
+            socketClient.start();
+            socketClient.startTextChannels();
+        } catch(IOException exception) {
+            System.out.println("Error trying to connect the client: " + exception.getMessage());
+        }
+
     }
 
     public void disconnect() {
-        socketClient.stop();
-        socketClient.stopTextChannels();
+        try {
+            socketClient.stop();
+            socketClient.stopTextChannels();
+        } catch (IOException exception) {
+            System.out.println("Error trying to disconnect the client: " + exception.getMessage());
+        }
+
     }
 }

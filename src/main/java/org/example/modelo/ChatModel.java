@@ -27,6 +27,9 @@ public class ChatModel {
         } catch (IOException exception) {
             System.out.println("Error trying to disconnect the client: " + exception.getMessage());
         }
+    }
+
+    public void sendMessage() {
 
     }
 }

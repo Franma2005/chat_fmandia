@@ -19,21 +19,41 @@ public class SocketTCPClient {
     }
 
     public void start() throws IOException {
-        System.out.println("Opening the channels of communication");
+        System.out.println("(Client) Opening the channels of communication");
         socket = new Socket(ipServer, port);
         out = socket.getOutputStream();
         in = socket.getInputStream();
-        System.out.println("The channels of communication have been opened");
+        System.out.println("(Client) The channels of communication have been opened");
     }
 
     public void startTextChannels() {
-        System.out.println("Opening the text channels of communication");
+        System.out.println("(Client) Opening the text channels of communication");
         br = new BufferedReader(new InputStreamReader(in));
         pw = new PrintWriter(out);
-        System.out.println("The text channels of communication have been closed");
+        System.out.println("(Client) The text channels of communication have been closed");
     }
 
-    public void stop() {
-        System.out.println("Closing the channels of communication");
+    public void stop() throws IOException {
+        System.out.println("(Client) Closing the channels of communication");
+        in.close();
+        out.close();
+        socket.close();
+        System.out.println("(Client) The channels of communication have been opened");
+    }
+
+    public void stopTextChannels() throws IOException {
+        System.out.println("(Client) Closing the text channels of communicantion");
+        br.close();
+        pw.close();
+        System.out.println("(Client) The text channels of communication have been closed");
+    }
+
+    public String sendMessage() throws IOException {
+        return "(Client) " + br.readLine();
+    }
+
+    public void reciveMessage(String message) {
+        System.out.println("(Client) " + message);
+        pw.println(message);
     }
 }

@@ -1,35 +1,27 @@
 package org.example.controlador;
 
-import org.example.entities.Config;
 import org.example.modelo.ChatModel;
 import org.example.vista.ChatView;
 
 public class ChatControler {
-    private final Config config = Config.getInstance();
     private ChatModel model;
     private ChatView view;
 
     private static ChatControler instance;
 
-    public ChatControler() {
-        this.model = new ChatModel(config.getIP(), config.getPORT());
-        this.view = new ChatView();
+    public ChatControler(ChatModel model, ChatView view) {
+        this.model = model;
+        this.view = view;
     }
 
-    public static ChatControler getInstance() {
+    public static ChatControler getInstance(ChatModel model, ChatView view) {
         if (instance == null)
-            instance = new ChatControler();
+            instance = new ChatControler(model, view);
         return instance;
     }
 
     public void init() {
-        boolean salir;
-        do {
-           model.connect();
-           sendMessage();
-           salir = reciveMessage();
-        } while(salir);
-        model.disconnect();
+        model.connect();
     }
 
     public void sendMessage() {
@@ -37,10 +29,9 @@ public class ChatControler {
     }
     
     public boolean reciveMessage() {
-        String text = model.reciveMessage();
-        view.setTextArea(text);
-        if (text.equals("END")) {
-            return false;
+        view.setTextArea(model.reciveMessage());
+        if (view.getTextSend().equals("END")) {
+            model.disconnect();
         }
         return true;
     }

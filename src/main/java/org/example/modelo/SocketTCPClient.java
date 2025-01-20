@@ -29,8 +29,8 @@ public class SocketTCPClient {
     public void startTextChannels() {
         System.out.println("(Client) Opening the text channels of communication");
         br = new BufferedReader(new InputStreamReader(in));
-        pw = new PrintWriter(out);
-        System.out.println("(Client) The text channels of communication have been closed");
+        pw = new PrintWriter(out, true);
+        System.out.println("(Client) The text channels of communication have been openned");
     }
 
     public void stop() throws IOException {
@@ -51,9 +51,10 @@ public class SocketTCPClient {
     public void sendMessage(String message) {
         System.out.println("(Client) " + message);
         pw.println(message);
+        pw.flush();
     }
 
     public String reciveMessage() throws IOException {
-        return "(Client) " + br.readLine();
+        return "(Server) " + br.readLine();
     }
 }

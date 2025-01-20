@@ -4,6 +4,10 @@
  */
 package org.example.vista;
 
+import org.example.controlador.ChatControler;
+import org.example.entities.Config;
+import org.example.modelo.ChatModel;
+
 /**
  *
  * @author fmandia
@@ -13,10 +17,16 @@ public class ChatView extends javax.swing.JFrame {
     /**
      * Creates new form ChatView
      */
+    private final Config config = Config.getInstance();
+    private ChatControler controler;
+    private ChatModel model = new ChatModel(config.getIP(), config.getPORT());
     public ChatView() {
         initComponents();
+        this.controler = ChatControler.getInstance(model, this);
+        this.controler.init();
+        setVisible(true);
     }
-    
+
     public String getTextSend() {
         return this.textSend.getText();
     }
@@ -30,6 +40,7 @@ public class ChatView extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel3 = new javax.swing.JPanel();
+        text = new javax.swing.JLabel();
         principal = new javax.swing.JPanel();
         titlePanel = new javax.swing.JPanel();
         title = new javax.swing.JLabel();
@@ -37,8 +48,8 @@ public class ChatView extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         textArea = new javax.swing.JTextArea();
         textSendPanel = new javax.swing.JPanel();
-        textSend = new javax.swing.JLabel();
         buttonSend = new javax.swing.JButton();
+        textSend = new javax.swing.JTextField();
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -50,6 +61,8 @@ public class ChatView extends javax.swing.JFrame {
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 100, Short.MAX_VALUE)
         );
+
+        text.setText("jLabel1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -90,6 +103,17 @@ public class ChatView extends javax.swing.JFrame {
         );
 
         buttonSend.setText("Send");
+        buttonSend.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonSendActionPerformed(evt);
+            }
+        });
+
+        textSend.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                textSendActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout textSendPanelLayout = new javax.swing.GroupLayout(textSendPanel);
         textSendPanel.setLayout(textSendPanelLayout);
@@ -104,12 +128,15 @@ public class ChatView extends javax.swing.JFrame {
         );
         textSendPanelLayout.setVerticalGroup(
             textSendPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(textSendPanelLayout.createSequentialGroup()
-                .addGroup(textSendPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, textSendPanelLayout.createSequentialGroup()
+                .addGroup(textSendPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(textSendPanelLayout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(textSend, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addComponent(buttonSend, javax.swing.GroupLayout.DEFAULT_SIZE, 34, Short.MAX_VALUE))
+                        .addComponent(textSend)
+                        .addGap(5, 5, 5))
+                    .addGroup(textSendPanelLayout.createSequentialGroup()
+                        .addGap(3, 3, 3)
+                        .addComponent(buttonSend, javax.swing.GroupLayout.DEFAULT_SIZE, 34, Short.MAX_VALUE)))
                 .addContainerGap())
         );
 
@@ -145,6 +172,16 @@ public class ChatView extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void buttonSendActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonSendActionPerformed
+        // TODO add your handling code here:
+        controler.sendMessage();
+        controler.reciveMessage();
+    }//GEN-LAST:event_buttonSendActionPerformed
+
+    private void textSendActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textSendActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_textSendActionPerformed
 
     public void setTextArea(String message) {
         this.textArea.append(message);
@@ -191,8 +228,9 @@ public class ChatView extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JPanel principal;
+    private javax.swing.JLabel text;
     private javax.swing.JTextArea textArea;
-    private javax.swing.JLabel textSend;
+    private javax.swing.JTextField textSend;
     private javax.swing.JPanel textSendPanel;
     private javax.swing.JLabel title;
     private javax.swing.JPanel titlePanel;

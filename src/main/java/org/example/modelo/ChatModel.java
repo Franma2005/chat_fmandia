@@ -14,7 +14,7 @@ public class ChatModel {
         try {
             socketClient.start();
             socketClient.startTextChannels();
-        } catch(IOException exception) {
+        } catch (IOException exception) {
             System.out.println("Error trying to connect the client: " + exception.getMessage());
         }
 
@@ -35,9 +35,10 @@ public class ChatModel {
     
     public String reciveMessage() {
         try {
-            return socketClient.reciveMessage();
-        } catch(IOException exception) {
-            System.out.println("Error trying to recive the message" + exception.getMessage());
+            String message = socketClient.reciveMessage();
+            return message;
+        } catch (IOException exception) {
+            System.out.println("Error trying to recive the message: " + exception.getMessage());
         }
         return "";
     }

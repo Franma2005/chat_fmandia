@@ -18,12 +18,16 @@ public class SocketTCPClient {
         this.port = port;
     }
 
-    public void start() throws IOException {
-        System.out.println("(Client) Opening the channels of communication");
-        socket = new Socket(ipServer, port);
-        out = socket.getOutputStream();
-        in = socket.getInputStream();
-        System.out.println("(Client) The channels of communication have been opened");
+    public void startBytesChannels() {
+        try {
+            System.out.println("(Client) Opening the channels of communication");
+            socket = new Socket(ipServer, port);
+            out = socket.getOutputStream();
+            in = socket.getInputStream();
+            System.out.println("(Client) The channels of communication have been opened");
+        } catch (IOException exception) {
+            System.out.println("Exception open the bytes channels of the socket");
+        }
     }
 
     public void startTextChannels() {
@@ -33,28 +37,34 @@ public class SocketTCPClient {
         System.out.println("(Client) The text channels of communication have been openned");
     }
 
-    public void stop() throws IOException {
-        System.out.println("(Client) Closing the channels of communication");
-        in.close();
-        out.close();
-        socket.close();
-        System.out.println("(Client) The channels of communication have been opened");
+    public void stopBytesChannels() {
+        try {
+            System.out.println("(Client) Closing the channels of communication");
+            in.close();
+            out.close();
+            socket.close();
+            System.out.println("(Client) The channels of communication have been opened");
+        } catch (IOException exception) {
+            System.out.println("Exception close the bytes channels of the socket");
+        }
     }
 
-    public void stopTextChannels() throws IOException {
-        System.out.println("(Client) Closing the text channels of communicantion");
-        br.close();
-        pw.close();
-        System.out.println("(Client) The text channels of communication have been closed");
+    public void stopTextChannels() {
+        try {
+            System.out.println("(Client) Closing the text channels of communicantion");
+            br.close();
+            pw.close();
+            System.out.println("(Client) The text channels of communication have been closed");
+        } catch (IOException exception) {
+            System.out.println("Exception close the text channels of the socket");
+        }
     }
 
-    public void sendMessage(String message) {
-        System.out.println("(Client) " + message);
-        pw.println(message);
-        pw.flush();
+    public BufferedReader getBr() {
+        return br;
     }
 
-    public String reciveMessage() throws IOException {
-        return "(Server) " + br.readLine();
+    public PrintWriter getPw() {
+        return pw;
     }
 }

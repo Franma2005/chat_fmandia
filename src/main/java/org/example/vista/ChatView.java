@@ -17,9 +17,8 @@ public class ChatView extends javax.swing.JFrame {
     /**
      * Creates new form ChatView
      */
-    private final Config config = Config.getInstance();
     private ChatControler controler;
-    private ChatModel model = new ChatModel(config.getIP(), config.getPORT());
+    private ChatModel model = ChatModel.getInstance();
     public ChatView() {
         initComponents();
         this.controler = ChatControler.getInstance(model, this);
@@ -176,7 +175,6 @@ public class ChatView extends javax.swing.JFrame {
     private void buttonSendActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonSendActionPerformed
         // TODO add your handling code here:
         controler.sendMessage();
-        controler.reciveMessage();
     }//GEN-LAST:event_buttonSendActionPerformed
 
     private void textSendActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textSendActionPerformed

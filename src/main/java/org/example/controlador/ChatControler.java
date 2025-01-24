@@ -28,11 +28,5 @@ public class ChatControler {
         model.sendMessage(view.getTextSend());
     }
     
-    public boolean reciveMessage() {
-        view.setTextArea(model.reciveMessage());
-        if (view.getTextSend().equals("END")) {
-            model.disconnect();
-        }
-        return true;
-    }
+
 }

@@ -1,11 +1,15 @@
 package org.example.controlador;
 
 import org.example.entities.Config;
+import org.example.interfaces.MyObservable;
+import org.example.interfaces.MyObserver;
 import org.example.modelo.ChatModel;
 import org.example.modelo.ReciveMessage;
 import org.example.vista.ChatView;
 
-public class ChatControler {
+import java.util.ArrayList;
+
+public class ChatControler implements MyObserver {
     private ChatModel model;
     ReciveMessage  reciveMessage;
     private ChatView view;
@@ -28,5 +32,11 @@ public class ChatControler {
 
     public void sendMessage() {
         model.sendMessage(view.getTextSend());
+    }
+
+
+    @Override
+    public void update(String message) {
+        view.setTextArea(message + "\n");
     }
 }

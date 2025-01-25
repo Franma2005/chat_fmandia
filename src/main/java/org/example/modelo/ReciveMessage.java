@@ -27,11 +27,12 @@ public class ReciveMessage extends SocketTCPClient implements  Runnable, MyObser
     @Override
     public void run() {
         while(true) {
+            emit();
         }
     }
 
     @Override
     public void emit() {
-
+        controler.update(reciveMessage());
     }
 }

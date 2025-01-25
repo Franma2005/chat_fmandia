@@ -18,12 +18,18 @@ public class ChatView extends javax.swing.JFrame {
      * Creates new form ChatView
      */
     private ChatControler controler;
-    private ChatModel model = ChatModel.getInstance();
-    public ChatView() {
+    private static ChatView instance;
+
+    private ChatView(ChatControler controler) {
         initComponents();
-        this.controler = ChatControler.getInstance(model, this);
-        this.controler.init();
+        this.controler = controler;
         setVisible(true);
+    }
+
+    public static ChatView getInstance(ChatControler controler) {
+        if (instance == null)
+            instance = new ChatView(controler);
+        return instance;
     }
 
     public String getTextSend() {
@@ -183,41 +189,6 @@ public class ChatView extends javax.swing.JFrame {
 
     public void setTextArea(String message) {
         this.textArea.append(message);
-    }
-    
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(ChatView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(ChatView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(ChatView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(ChatView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new ChatView().setVisible(true);
-            }
-        });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

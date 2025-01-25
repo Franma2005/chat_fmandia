@@ -1,37 +1,32 @@
 package org.example.controlador;
 
+import org.example.entities.Config;
 import org.example.modelo.ChatModel;
 import org.example.modelo.ReciveMessage;
 import org.example.vista.ChatView;
 
 public class ChatControler {
     private ChatModel model;
-    ReciveMessage reciveMessage;
+    ReciveMessage  reciveMessage;
     private ChatView view;
 
     private static ChatControler instance;
 
-    public ChatControler(ChatModel model, ChatView view) {
-        this.model = model;
-        this.view = view;
-    }
+    private ChatControler() {}
 
-    public static ChatControler getInstance(ChatModel model, ChatView view) {
+    public static ChatControler getInstance() {
         if (instance == null)
-            instance = new ChatControler(model, view);
+            instance = new ChatControler();
         return instance;
     }
 
     public void init() {
+        this.model = ChatModel.getInstance();
+        this.view = ChatView.getInstance(this);
         model.connect();
     }
 
     public void sendMessage() {
         model.sendMessage(view.getTextSend());
-    }
-    
-    public void reciveMessage() {
-        System.out.println("Hola" + reciveMessage.getMessage());
-        view.setTextArea(reciveMessage.getMessage());
     }
 }

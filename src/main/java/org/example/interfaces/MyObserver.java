@@ -1,4 +1,7 @@
 package org.example.interfaces;
 
-public class MyObserver {
+public interface MyObserver {
+
+    public void update(String message);
+
 }

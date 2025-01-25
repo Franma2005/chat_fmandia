@@ -1,10 +1,12 @@
 package org.example.controlador;
 
 import org.example.modelo.ChatModel;
+import org.example.modelo.ReciveMessage;
 import org.example.vista.ChatView;
 
 public class ChatControler {
     private ChatModel model;
+    ReciveMessage reciveMessage;
     private ChatView view;
 
     private static ChatControler instance;
@@ -28,5 +30,8 @@ public class ChatControler {
         model.sendMessage(view.getTextSend());
     }
     
-
+    public void reciveMessage() {
+        System.out.println("Hola" + reciveMessage.getMessage());
+        view.setTextArea(reciveMessage.getMessage());
+    }
 }

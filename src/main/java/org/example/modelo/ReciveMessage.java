@@ -4,8 +4,6 @@ import java.io.IOException;
 
 public class ReciveMessage extends SocketTCPClient implements  Runnable{
 
-    private ChatModel chatModel = ChatModel.getInstance();
-
     public ReciveMessage(String ipServer, int port) {
         super(ipServer, port);
     }

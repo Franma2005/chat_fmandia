@@ -28,6 +28,7 @@ public class ChatModel {
         sendMessage.startTextChannels();
         reciveMessage.startBytesChannels();
         reciveMessage.startTextChannels();
+        new Thread(reciveMessage).start();
     }
 
     public void disconnect() {
@@ -39,9 +40,6 @@ public class ChatModel {
 
     public void sendMessage(String message) {
         sendMessage.sendMessage(message);
-    }
-
-    public void reciveMessage() {
-        new Thread(reciveMessage).start();
+        System.out.println(message);
     }
 }

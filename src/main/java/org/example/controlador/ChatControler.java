@@ -35,6 +35,7 @@ public class ChatControler implements MyObserver {
     }
 
     public void closeChannels() {
+
         model.disconnect();
     }
 

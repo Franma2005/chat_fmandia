@@ -67,4 +67,8 @@ public class SocketTCPClient {
     public PrintWriter getPw() {
         return pw;
     }
+
+    public void closeServerChannels() {
+
+    }
 }

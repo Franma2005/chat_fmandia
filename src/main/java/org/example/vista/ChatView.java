@@ -5,8 +5,6 @@
 package org.example.vista;
 
 import org.example.controlador.ChatControler;
-import org.example.entities.Config;
-import org.example.modelo.ChatModel;
 
 /**
  *
@@ -24,6 +22,11 @@ public class ChatView extends javax.swing.JFrame {
         initComponents();
         this.controler = controler;
         setVisible(true);
+    }
+    
+    public void close() {
+        this.setDefaultCloseOperation(ChatView.DISPOSE_ON_CLOSE);
+        controler.closeChannels();
     }
 
     public static ChatView getInstance(ChatControler controler) {

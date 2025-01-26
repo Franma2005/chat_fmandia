@@ -34,6 +34,9 @@ public class ChatControler implements MyObserver {
         model.sendMessage(view.getTextSend());
     }
 
+    public void closeChannels() {
+        model.disconnect();
+    }
 
     @Override
     public void update(String message) {

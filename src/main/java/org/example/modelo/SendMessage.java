@@ -1,14 +1,16 @@
 package org.example.modelo;
 
 //* Clase para el envio de mensajes
-public class SendMessage extends SocketTCPClient {
+public class SendMessage {
 
-    public SendMessage(String ipServer, int port) {
-        super(ipServer, port);
+    private SocketTCPClient socket;
+
+    public SendMessage(SocketTCPClient socket) {
+        this.socket = socket;
     }
 
     public void sendMessage(String message) {
-        getPw().println(message);
-        getPw().flush();
+        socket.getPw().println(message);
+        socket.getPw().flush();
     }
 }

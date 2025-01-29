@@ -33,6 +33,7 @@ public class ChatView extends javax.swing.JFrame {
         addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
+                controler.sendMessage("/END");
                 controler.closeChannels();
             }
         });

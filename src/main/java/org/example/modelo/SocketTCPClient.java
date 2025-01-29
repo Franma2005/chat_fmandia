@@ -14,14 +14,23 @@ public class SocketTCPClient {
     private PrintWriter pw;
 
     public SocketTCPClient(String ipServer, int port) {
-        this.ipServer = ipServer;
-        this.port = port;
+        startSocket(ipServer, port);
+    }
+
+    private void startSocket(String ipServer, int port) {
+        try {
+            System.out.println("(Client) Starting socket");
+            socket = new Socket(ipServer, port);
+            System.out.println("(Client) Socket is start");
+        } catch (IOException exception) {
+            System.out.println("Error al inicializar el socket del cliente");
+        }
+
     }
 
     public void startBytesChannels() {
         try {
             System.out.println("(Client) Opening the channels of communication");
-            socket = new Socket(ipServer, port);
             out = socket.getOutputStream();
             in = socket.getInputStream();
             System.out.println("(Client) The channels of communication have been opened");

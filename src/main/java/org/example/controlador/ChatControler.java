@@ -1,10 +1,7 @@
 package org.example.controlador;
 
-import org.example.entities.Config;
-import org.example.interfaces.MyObservable;
 import org.example.interfaces.MyObserver;
 import org.example.modelo.ChatModel;
-import org.example.modelo.ReciveMessage;
 import org.example.vista.ChatView;
 
 //* Esta clase se usa para unir la vista y el controlador
@@ -35,6 +32,11 @@ public class ChatControler implements MyObserver {
     // Enviar un mensaje
     public void sendMessage() {
         model.sendMessage(view.getTextSend());
+    }
+
+    // Enviar un mensaje
+    public void sendMessage(String message) {
+        model.sendMessage(message);
     }
 
     // Cerrar los canales de comunicacion del cliente

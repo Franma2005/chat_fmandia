@@ -6,6 +6,7 @@ import org.example.entities.Config;
 public class ChatModel {
 
     // Clases encargadas del envio de mensajes y la recepcion
+    private SocketTCPClient socketTCPClient;
     private SendMessage sendMessage;
     private ReciveMessage reciveMessage;
 
@@ -15,8 +16,9 @@ public class ChatModel {
 
     // Constructor
     private ChatModel(String ip, int port) {
-        this.sendMessage = new SendMessage(ip, port);
-        this.reciveMessage = new ReciveMessage(ip, port);
+        this.socketTCPClient = new SocketTCPClient(ip, port);
+        this.sendMessage = new SendMessage(socketTCPClient);
+        this.reciveMessage = new ReciveMessage(socketTCPClient);
     }
 
     // Patrón de instancia unica
@@ -28,22 +30,18 @@ public class ChatModel {
 
     // Se abren los canales de envio y recepción de mensajes
     public void connect() {
-        sendMessage.startBytesChannels();
-        sendMessage.startTextChannels();
-        reciveMessage.startBytesChannels();
-        reciveMessage.startTextChannels();
+        socketTCPClient.startBytesChannels();
+        socketTCPClient.startTextChannels();
         new Thread(reciveMessage).start();
     }
 
     // Se cierran los canales de envio y recepción de mensajes
     public void disconnect() {
-        sendMessage.stopBytesChannels();
-        sendMessage.stopTextChannels();
-        reciveMessage.stopBytesChannels();
-        reciveMessage.stopTextChannels();
+        socketTCPClient.stopTextChannels();
+        socketTCPClient.stopBytesChannels();
     }
 
-    //
+    // Esta operación la he centralizado en esta clase
     public void sendMessage(String message) {
         sendMessage.sendMessage(message);
         System.out.println(message);

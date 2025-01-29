@@ -60,6 +60,10 @@ public class SocketTCPClient {
         }
     }
 
+    public Socket getSocket() {
+        return socket;
+    }
+
     public BufferedReader getBr() {
         return br;
     }
@@ -68,7 +72,9 @@ public class SocketTCPClient {
         return pw;
     }
 
-    public void closeServerChannels() {
-
-    }
+    /*public void closeServerChannels() {
+        System.out.println("Disconnect" + );
+        getPw().println();
+        getPw().flush();
+    }*/
 }

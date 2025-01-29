@@ -6,6 +6,9 @@ package org.example.vista;
 
 import org.example.controlador.ChatControler;
 
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+
 /**
  *
  * @author fmandia
@@ -21,12 +24,18 @@ public class ChatView extends javax.swing.JFrame {
     private ChatView(ChatControler controler) {
         initComponents();
         this.controler = controler;
+        close();
         setVisible(true);
     }
     
     public void close() {
         this.setDefaultCloseOperation(ChatView.DISPOSE_ON_CLOSE);
-        controler.closeChannels();
+        addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                controler.closeChannels();
+            }
+        });
     }
 
     public static ChatView getInstance(ChatControler controler) {

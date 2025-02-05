@@ -1,6 +1,6 @@
 package org.example.entities;
 
-public enum Type {
+public enum Action {
     SEND_MESSAGE,
     CLOSE_WINDOW,
     CREATE_CHAT_ROOM,

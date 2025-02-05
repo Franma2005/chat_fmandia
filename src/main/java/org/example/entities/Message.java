@@ -2,20 +2,20 @@ package org.example.entities;
 
 public class Message {
 
-    private Type type;
+    private Action action;
     private String content;
 
-    public Message(Type type, String content) {
-        this.type = type;
+    public Message(Action type, String content) {
+        this.action = type;
         this.content = content;
     }
 
-    public Type getType() {
-        return type;
+    public Action getAction() {
+        return action;
     }
 
-    public void setType(Type type) {
-        this.type = type;
+    public void setAction(Action action) {
+        this.action = action;
     }
 
     public String getContent() {

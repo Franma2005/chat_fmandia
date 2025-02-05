@@ -1,5 +1,7 @@
 package org.example.modelo;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import org.example.entities.Config;
 import org.example.entities.Message;
 
@@ -44,6 +46,7 @@ public class ChatModel {
 
     // Esta operación la he centralizado en esta clase
     public void sendMessage(Message message) {
-        sendMessage.sendMessage(message);
+        Gson gson = new GsonBuilder().create();
+        sendMessage.sendMessage(gson.toJson(message));
     }
 }

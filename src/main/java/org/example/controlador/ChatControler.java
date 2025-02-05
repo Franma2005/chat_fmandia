@@ -1,7 +1,7 @@
 package org.example.controlador;
 
 import org.example.entities.Message;
-import org.example.entities.Type;
+import org.example.entities.Action;
 import org.example.interfaces.MyObserver;
 import org.example.modelo.ChatModel;
 import org.example.vista.ChatView;
@@ -33,12 +33,13 @@ public class ChatControler implements MyObserver {
 
     // Enviar un mensaje
     public void sendMessage() {
-        model.sendMessage(view.getTextSend());
+        Message jsonMessage = new Message(Action.SEND_MESSAGE, view.getTextSend());
+        model.sendMessage(jsonMessage);
     }
 
     // Enviar un mensaje
     public void sendMessage(String message) {
-        Message jsonMessage = new Message(Type.SEND_MESSAGE, message);
+        Message jsonMessage = new Message(Action.CLOSE_WINDOW, message);
         model.sendMessage(jsonMessage);
     }
 

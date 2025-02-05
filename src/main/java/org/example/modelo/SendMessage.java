@@ -1,6 +1,6 @@
 package org.example.modelo;
 
-import org.example.entities.Message;
+
 
 //* Clase para el envio de mensajes
 public class SendMessage {
@@ -11,7 +11,7 @@ public class SendMessage {
         this.socket = socket;
     }
 
-    public void sendMessage(Message message) {
+    public void sendMessage(String message) {
         socket.getPw().println(message);
         socket.getPw().flush();
     }

@@ -32,14 +32,8 @@ public class ChatControler implements MyObserver {
     }
 
     // Enviar un mensaje
-    public void sendMessage() {
-        Message jsonMessage = new Message(Action.SEND_MESSAGE, view.getTextSend());
-        model.sendMessage(jsonMessage);
-    }
-
-    // Enviar un mensaje
-    public void sendMessage(String message) {
-        Message jsonMessage = new Message(Action.CLOSE_WINDOW, message);
+    public void sendMessage(Action action, String message) {
+        Message jsonMessage = new Message(action, message);
         model.sendMessage(jsonMessage);
     }
 

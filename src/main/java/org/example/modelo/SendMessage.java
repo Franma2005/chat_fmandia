@@ -1,7 +1,5 @@
 package org.example.modelo;
 
-
-
 //* Clase para el envio de mensajes
 public class SendMessage {
 

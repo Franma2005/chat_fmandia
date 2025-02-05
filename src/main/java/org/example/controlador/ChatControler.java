@@ -1,9 +1,14 @@
 package org.example.controlador;
 
+import java.util.HashMap;
+import org.example.command.CreateChatRoom;
+import org.example.command.ObtainMessage;
 import org.example.entities.Message;
 import org.example.entities.Action;
+import org.example.interfaces.MyCommand;
 import org.example.interfaces.MyObserver;
 import org.example.modelo.ChatModel;
+import org.example.services.JsonService;
 import org.example.vista.ChatView;
 
 //* Esta clase se usa para unir la vista y el controlador
@@ -11,11 +16,19 @@ public class ChatControler implements MyObserver {
     // Vistas y controladores
     private ChatModel model;
     private ChatView view;
+    private HashMap<Action, MyCommand> commands;
+    private JsonService jsonService;
 
     // Instancia unica
     private static ChatControler instance;
 
-    private ChatControler() {}
+    private ChatControler() {
+        commands = new HashMap<>() {{
+            put(Action.SEND_MESSAGE, new ObtainMessage());
+            put(Action.CREATE_CHAT_ROOM, new CreateChatRoom());
+        }};
+        jsonService = JsonService.getInstance();
+    }
 
     // Metodo instancia unica
     public static ChatControler getInstance() {
@@ -44,7 +57,8 @@ public class ChatControler implements MyObserver {
 
     // Metodo del patron observer que es notificado cuando llega un mensaje
     @Override
-    public void update(String message) {
-        view.setTextArea(message + "\n");
+    public void update(String messageJson) {
+        Message message = jsonService.destructureJson(messageJson);
+        commands.get(message.getAction()).execute(message, view);
     }
 }

@@ -4,11 +4,12 @@
  */
 package org.example.vista;
 
+import java.awt.Component;
 import org.example.controlador.ChatControler;
-
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.util.ArrayList;
+import javax.swing.DefaultListModel;
+import javax.swing.JList;
 import org.example.entities.Action;
 
 /**
@@ -21,12 +22,14 @@ public class ChatView extends javax.swing.JFrame {
      * Creates new form ChatView
      */
     private ChatControler controler;
-    private ArrayList<String> chatRooms = new ArrayList<>();
     private static ChatView instance;
+    private DefaultListModel<String> listModel;
 
     private ChatView(ChatControler controler) {
         initComponents();
         this.controler = controler;
+        this.listModel = new DefaultListModel<>();
+        this.listRoom.setModel(listModel);
         close();
         setVisible(true);
     }
@@ -264,6 +267,10 @@ public class ChatView extends javax.swing.JFrame {
 
     public void setTextArea(String message) {
         this.textArea.append(message);
+    }
+    
+    public void addListRoom(String message) {
+        listModel.addElement(message);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

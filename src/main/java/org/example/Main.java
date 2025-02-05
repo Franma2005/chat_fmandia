@@ -5,7 +5,6 @@ import org.example.controlador.ChatControler;
 
 public class Main {
     public static void main(String[] args) {
-
         FlatDarkPurpleIJTheme.setup();
 
         ChatControler chatControler = ChatControler.getInstance();

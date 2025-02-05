@@ -59,6 +59,7 @@ public class ChatControler implements MyObserver {
     @Override
     public void update(String messageJson) {
         Message message = jsonService.destructureJson(messageJson);
-        commands.get(message.getAction()).execute(message, view);
+        if(message != null)
+            commands.get(message.getAction()).execute(message, view);
     }
 }

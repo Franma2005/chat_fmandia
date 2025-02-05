@@ -4,12 +4,12 @@
  */
 package org.example.vista;
 
-import java.awt.Component;
 import org.example.controlador.ChatControler;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import javax.swing.DefaultListModel;
-import javax.swing.JList;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import org.example.entities.Action;
 
 /**
@@ -30,6 +30,7 @@ public class ChatView extends javax.swing.JFrame {
         this.controler = controler;
         this.listModel = new DefaultListModel<>();
         this.listRoom.setModel(listModel);
+        listenList();
         close();
         setVisible(true);
     }
@@ -44,6 +45,18 @@ public class ChatView extends javax.swing.JFrame {
             }
         });
     }
+    
+    public void listenList() {
+        this.listRoom.addListSelectionListener(new ListSelectionListener() {
+            @Override
+            public void valueChanged(ListSelectionEvent e) {
+                String selected = listRoom.getSelectedValue();
+                controler.sendMessage(Action.CHANGE_CHAT_ROOM , selected);
+            }
+        });
+    }
+    
+   
 
     public static ChatView getInstance(ChatControler controler) {
         if (instance == null)
